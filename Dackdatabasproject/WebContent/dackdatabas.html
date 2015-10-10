@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.css"/>
+<script type="text/javascript"  src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="/WebContent/jquery.cookie.js"></script>
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.js"></script>
+<script src="init.js"></script>
+<title>Search Tire database</title>
+</head>
+ 
+<body>
+ 
+Search by car manufacturer and models.<br />
+ 
+ 
+<form action="dackdatabas.html" method="get">
+  Select car manufacturer :
+  <select id="mySelectID" onchange="populateModelSelect(this)" name="select" class="main-form">
+    <option value="">Select</option>
+  </select>
+  <br />
+  Select model :
+  <select id="mySelectID2" name="select2" class="main-form" >
+    <option value="">Select</option>
+  </select>
+  <br />
+  <input type="submit" value="Search" />
+</form> 
+<br />
+<br />
+
+<div class="container well">
+    <table id="myTable" class="display" cellspacing="0" width="100%"></table>
+</div>
+
+<script type="text/javascript">
+
+var carMaker_query = getUrlVars()["select"]; 
+var model_query = getUrlVars()["select2"];
+var carMakerMatch = new RegExp(carMaker_query, "i");
+if (typeof(carMaker_query) == "undefined" || carMaker_query === "" )
+{
+}
+else
+{
+var filteredResult = [];
+$.each(localStorage, function(key, value) {
+	var item = JSON.parse(localStorage.getItem(localStorage.key(key)));
+	var arrayObj = [];
+	if (carMakerMatch.test(item.carMaker)){
+		if(model_query.replace(/\+/g, '') == item.model.replace(/\s/g, '')){
+			for(var x in item){
+				arrayObj.push(item[x]);
+				}
+			filteredResult.push(arrayObj);
+		}
+	}
+});
+$('#myTable').DataTable( {
+    data: filteredResult,
+    columns: [
+        { title: "Manufacturer" },
+        { title: "Model" },
+        { title: "Engine" },
+        { title: "OE_base" },
+        { title: "Width" },
+        { title: "Series" },
+        { title: "R" },
+        { title: "Rim" },
+        { title: "LI" },
+        { title: "SI" },
+        { title: "bar_part__front" },
+        { title: "bar_part__rear" },
+        { title: "bar_full_front" },
+        { title: "bar_full_rear" }
+    ],
+	"paging":   false
+} );
+}
+ 
+//GET URL VARS function
+function getUrlVars() {
+var vars = {};
+var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+key = decodeURIComponent(key);
+value = decodeURIComponent(value);
+vars[key] = value;
+});
+return vars;
+}
+ 
+</script>
+ 
+</body>
+</html>
