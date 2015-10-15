@@ -12,10 +12,9 @@
  
 <body>
  
-Search by car manufacturer and models.<br />
+<h3>Search by car manufacturer and model</h3><br />
  
- 
-<form action="dackdatabas.html" method="get">
+<form onsubmit="updateTable()" id="searchForm">
   Select car manufacturer :
   <select id="mySelectID" onchange="populateModelSelect(this)" name="select" class="main-form">
     <option value="">Select</option>
@@ -26,7 +25,7 @@ Search by car manufacturer and models.<br />
     <option value="">Select</option>
   </select>
   <br />
-  <input type="submit" value="Search" />
+  <button type="button" value="Search" onclick="return updateTable()">Search</button>
 </form> 
 <br />
 <br />

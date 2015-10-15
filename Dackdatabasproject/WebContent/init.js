@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	
 	var visited = $.cookie("visited");
 	if(visited == null){
 		$.cookie('visited', 'yes');
@@ -45,50 +46,8 @@ $(document).ready(function(){
 	populateMakerSelect();
 	$.cookie('visited', 'yes', { expires: 1, path: '/' });
 
-	var carMaker_query = getUrlVars()["select"]; 
-	var model_query = getUrlVars()["select2"];
-	var carMakerMatch = new RegExp(carMaker_query, "i");
-	if (typeof(carMaker_query) == "undefined" || carMaker_query === "" )
-	{
-	}
-	else
-	{
-		var filteredResult = [];
-		$.each(localStorage, function(key, value) {
-			var item = JSON.parse(localStorage.getItem(localStorage.key(key)));
-			var arrayObj = [];
-			if (carMakerMatch.test(item.carMaker)){
-				if(model_query.replace(/\+/g, '') == item.model.replace(/\s/g, '')){
-					for(var x in item){
-						arrayObj.push(item[x]);
-					}
-					filteredResult.push(arrayObj);
-				}
-			}
-		});
-		$('#myTable').DataTable( {
-			data: filteredResult,
-			columns: [
-			          { title: "Manufacturer" },
-			          { title: "Model" },
-			          { title: "Engine" },
-			          { title: "OE_base" },
-			          { title: "Width" },
-			          { title: "Series" },
-			          { title: "R" },
-			          { title: "Rim" },
-			          { title: "LI" },
-			          { title: "SI" },
-			          { title: "bar_part__front" },
-			          { title: "bar_part__rear" },
-			          { title: "bar_full_front" },
-			          { title: "bar_full_rear" }
-			          ],
-			          "paging":   false
-		} );
-	}
-
 });
+
 function populateMakerSelect(){
 	var carMakers = [];
 	$.each(localStorage, function(key, value) {
@@ -120,13 +79,52 @@ function populateModelSelect(selected){
 	});
 }
 
-function getUrlVars() {
-	var vars = {};
-	var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-		key = decodeURIComponent(key);
-		value = decodeURIComponent(value);
-		vars[key] = value;
-	});
-	return vars;
+function updateTable(){
+	var selectedCarMaker = document.getElementById('mySelectID');
+	var carMaker_query = selectedCarMaker.options[selectedCarMaker.selectedIndex].text;
+	var selectedModel = document.getElementById('mySelectID2');
+	var model_query = selectedModel.options[selectedModel.selectedIndex].text;
+	//console.log(carMaker_query + " : " + model_query);
+	var carMakerMatch = new RegExp(carMaker_query, "i");
+	if (typeof(carMaker_query) == "undefined" || carMaker_query === "" )
+	{
+	}
+	else
+	{
+		var filteredResult = [];
+		$.each(localStorage, function(key, value) {
+			var item = JSON.parse(localStorage.getItem(localStorage.key(key)));
+			var arrayObj = [];
+			if (carMakerMatch.test(item.carMaker)){
+				if(model_query.replace(/\s/g, '') == item.model.replace(/\s/g, '')){
+					//console.log('true!!!!!');
+					for(var x in item){
+						arrayObj.push(item[x]);
+					}
+					filteredResult.push(arrayObj);
+				}
+			}
+		});
+		$('#myTable').DataTable( {
+			destroy: true,
+			data: filteredResult,
+			columns: [
+			          { title: "Manufacturer" },
+			          { title: "Model" },
+			          { title: "Engine" },
+			          { title: "OE_base" },
+			          { title: "Width" },
+			          { title: "Series" },
+			          { title: "R" },
+			          { title: "Rim" },
+			          { title: "LI" },
+			          { title: "SI" },
+			          { title: "bar_part__front" },
+			          { title: "bar_part__rear" },
+			          { title: "bar_full_front" },
+			          { title: "bar_full_rear" }
+			          ],
+			          "paging":   false
+		} );
+	}
 }
-
