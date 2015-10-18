@@ -2,37 +2,40 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.css"/>
-<script type="text/javascript"  src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="/WebContent/jquery.cookie.js"></script>
-<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.js"></script>
-<script src="init.js"></script>
-<title>Search Tire database</title>
-</head>
- 
-<body>
- 
-<h3>Search by car manufacturer and model</h3><br />
- 
-<form onsubmit="updateTable()" id="searchForm">
-  Select car manufacturer :
-  <select id="mySelectID" onchange="populateModelSelect(this)" name="select" class="main-form">
-    <option value="">Select</option>
-  </select>
-  <br />
-  Select model :
-  <select id="mySelectID2" name="select2" class="main-form" >
-    <option value="">Select</option>
-  </select>
-  <br />
-  <button type="button" value="Search" onclick="return updateTable()">Search</button>
-</form> 
-<br />
-<br />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.9/css/dataTables.bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/1.0.7/css/responsive.bootstrap.min.css" />
 
-<div class="container well">
-    <table id="myTable" class="display" cellspacing="0" width="100%"></table>
-</div>
- 
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.9/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/1.0.7/js/dataTables.responsive.min.js"></script>
+<script src="/WebContent/jquery.cookie.js"></script>
+<script src="init.js"></script>
+<title>Däckdatabas</title>
+</head>
+
+<body>
+	<div class="container">
+		<div class="jumbotron">
+			<h2>Sök efter biltillverkare och modell</h2>
+			<br />
+			<form onsubmit="updateTable()" id="searchForm">
+				<select id="mySelectID" onchange="populateModelSelect(this)" name="select" class="main-form">
+					<option value="">Biltillverkare</option>
+				</select>
+				<hr />
+				<select id="mySelectID2" onchange="return updateTable()" name="select2" class="main-form">
+					<option value="">Modell</option>
+				</select> <br />
+			</form>
+		</div>
+		<div class="row">
+			<table id="myTable" class="compact responsive table table-striped table-bordered" cellspacing="1" width="100%"></table>
+		</div>
+	</div>
+
 </body>
 </html>

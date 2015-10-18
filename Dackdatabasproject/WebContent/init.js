@@ -56,7 +56,8 @@ function populateMakerSelect(){
 			carMakers.push(carMakerItem.carMaker);
 		};
 	});
-
+	carMakers.sort();
+	
 	$.each(carMakers, function() {
 		$('#mySelectID').append($('<option>').attr('val', this).attr('text', this).text(this));
 	});
@@ -73,7 +74,9 @@ function populateModelSelect(selected){
 			};
 		};
 	});
+	models.sort();
 	$('#mySelectID2').find('option').remove();
+	$('#mySelectID2').append($('<option>').attr('val', "").text("Modell"));
 	$.each(models, function() {
 		$('#mySelectID2').append($('<option>').attr('val', this).attr('text', this).text(this));
 	});
@@ -109,22 +112,24 @@ function updateTable(){
 			destroy: true,
 			data: filteredResult,
 			columns: [
-			          { title: "Manufacturer" },
-			          { title: "Model" },
-			          { title: "Engine" },
-			          { title: "OE_base" },
-			          { title: "Width" },
-			          { title: "Series" },
-			          { title: "R" },
-			          { title: "Rim" },
-			          { title: "LI" },
-			          { title: "SI" },
-			          { title: "bar_part__front" },
-			          { title: "bar_part__rear" },
-			          { title: "bar_full_front" },
-			          { title: "bar_full_rear" }
+			          { className: "never" },
+			          { className: "never" },
+			          { title: "Engine", className: "all" },
+			          { title: "OE_base", className: "min-desktop" },
+			          { title: "Width", className: "min-desktop" },
+			          { title: "Series", className: "min-desktop" },
+			          { title: "R", className: "min-desktop" },
+			          { title: "Rim", className: "min-desktop" },
+			          { title: "LI", className: "min-desktop" },
+			          { title: "SI", className: "min-desktop" },
+			          { title: "bar_part__front", className: "min-desktop" },
+			          { title: "bar_part__rear", className: "min-desktop" },
+			          { title: "bar_full_front", className: "min-desktop" },
+			          { title: "bar_full_rear", className: "min-desktop" }
 			          ],
-			          "paging":   false
+			          "paging":   false,
+			          "info": false,
+			          "filter": false
 		} );
 	}
 }
