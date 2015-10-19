@@ -16,14 +16,24 @@ $(document).ready(function(){
 						var carModelObject = new Object();
 						carModelObject.carMaker = $(this).find('Car_maker').text();
 						carModelObject.model = $(this).find('Model').text();
-						carModelObject.engine = $(this).find('Engine').text();
+						if (typeof($(this).find('Engine').text()) == "undefined" || $(this).find('Engine').text() === ""){
+							carModelObject.engine = "Non Original";
+						}else{
+							carModelObject.engine = $(this).find('Engine').text();
+						}
 						carModelObject.OE_base = $(this).find('OE_base').text();
+						carModelObject.P_LT = $(this).find('P_LT').text();
 						carModelObject.width = $(this).find('width').text();
 						carModelObject.series = $(this).find('series').text();
+						carModelObject.ZR = $(this).find('ZR').text();
 						carModelObject.R = $(this).find('R').text();
 						carModelObject.rim = $(this).find('rim').text();
 						carModelObject.LI = $(this).find('LI').text();
 						carModelObject.SI = $(this).find('SI').text();
+						carModelObject.axle = $(this).find('axle').text();
+						carModelObject.RF_XL_C = $(this).find('RF_XL_C').text();
+						carModelObject.PR = $(this).find('PR').text();
+						carModelObject.f4x4 = $(this).find('4x4').text();
 						carModelObject.bar_part__front = $(this).find('bar_part__front').text();
 						carModelObject.bar_part__rear = $(this).find('bar_part__rear').text();
 						carModelObject.bar_full_front = $(this).find('bar_full_front').text();
@@ -116,17 +126,24 @@ function updateTable(){
 			          { className: "never" },
 			          { title: "Engine", className: "all" },
 			          { title: "OE_base", className: "min-desktop" },
+			          { title: "P_LT", className: "none" },
 			          { title: "Width", className: "min-desktop" },
 			          { title: "Series", className: "min-desktop" },
+			          { title: "ZR", className: "none" },
 			          { title: "R", className: "min-desktop" },
 			          { title: "Rim", className: "min-desktop" },
 			          { title: "LI", className: "min-desktop" },
 			          { title: "SI", className: "min-desktop" },
+			          { title: "axle", className: "none" },
+			          { title: "RF_XL_C", className: "none" },
+			          { title: "PR", className: "min-desktop" },
+			          { title: "4x4", className: "none" },
 			          { title: "bar_part__front", className: "min-desktop" },
 			          { title: "bar_part__rear", className: "min-desktop" },
 			          { title: "bar_full_front", className: "min-desktop" },
 			          { title: "bar_full_rear", className: "min-desktop" }
 			          ],
+			          "order": [[ 2, 'asc' ]],
 			          "paging":   false,
 			          "info": false,
 			          "filter": false

@@ -20,16 +20,18 @@
 <body>
 	<div class="container">
 		<div class="jumbotron">
-			<h2>Sök efter biltillverkare och modell</h2>
+			<h2>Sök efter modell</h2>
 			<br />
-			<form onsubmit="updateTable()" id="searchForm">
-				<select id="mySelectID" onchange="populateModelSelect(this)" name="select" class="main-form">
-					<option value="">Biltillverkare</option>
-				</select>
-				<hr />
-				<select id="mySelectID2" onchange="return updateTable()" name="select2" class="main-form">
-					<option value="">Modell</option>
-				</select> <br />
+			<form onsubmit="updateTable()" id="searchForm" class="form-inline">
+				<div class="form-group">
+					<select id="mySelectID" onchange="populateModelSelect(this)" name="select" class="form-control">
+						<option value="">Biltillverkare</option>
+					</select>
+					
+					<select id="mySelectID2" onchange="return updateTable()" name="select2" class="form-control">
+						<option value="">Modell</option>
+					</select>
+				</div>
 			</form>
 		</div>
 		<div class="row">
